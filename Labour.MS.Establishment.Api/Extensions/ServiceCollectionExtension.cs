@@ -29,7 +29,7 @@ namespace Labour.MS.Establishment.Api.Extensions
             services.AddSingleton<ITraceProvider, TraceProvider>();
             services.AddTransient<IApiResponseFactory, ApiResponseFactory>();
 
-            //services.AddSingleton<IBaseApiProxy, BaseApiProxy>();
+            services.AddScoped<IBaseApiProxy, BaseApiProxy>();
 
             services.AddScoped<IHttpStatusCodeResolver, HttpStatusCodeResolver>();
 

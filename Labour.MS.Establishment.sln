@@ -4,6 +4,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.13.35931.197
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Labour.MS.Establishment.Api", "Labour.MS.Establishment.Api\Labour.MS.Establishment.Api.csproj", "{636777C1-A2D7-4C31-8E98-D0FD35915947}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1AEBEF4E-3FAF-4C5F-83C3-8250BEBFBEA2} = {1AEBEF4E-3FAF-4C5F-83C3-8250BEBFBEA2}
+		{79A2E922-8343-48CF-B9CB-89B9F224B7B6} = {79A2E922-8343-48CF-B9CB-89B9F224B7B6}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Labour.MS.Establishment.Models", "Labour.MS.Establishment.Models\Labour.MS.Establishment.Models.csproj", "{1AEBEF4E-3FAF-4C5F-83C3-8250BEBFBEA2}"
 EndProject

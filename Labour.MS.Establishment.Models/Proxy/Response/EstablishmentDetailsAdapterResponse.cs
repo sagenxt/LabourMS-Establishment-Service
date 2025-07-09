@@ -8,6 +8,11 @@ namespace Labour.MS.Establishment.Models.Proxy.Response
 {
     public class EstablishmentDetailsAdapterResponse
     {
+        public EstablishmenAdaptertDetail? Data { get; set; }
+    }
+
+    public class EstablishmenAdaptertDetail
+    {
         public long? EstablishmentId { get; set; }
         public string? EstablishmentName { get; set; }
         public string? ContactPerson { get; set; }
@@ -24,7 +29,8 @@ namespace Labour.MS.Establishment.Models.Proxy.Response
         public int? CityId { get; set; }
         public string? CityCode { get; set; }
         public string? CityName { get; set; }
-        public string? VillageOrArea { get; set; }
+        public int? VillageOrAreaId { get; set; }
+        public string? VillageOrAreaName { get; set; }
         public int? Pincode { get; set; }
         public string? IsPlanApprovalId { get; set; }
         public string? PlanApprovalId { get; set; }
@@ -40,5 +46,6 @@ namespace Labour.MS.Establishment.Models.Proxy.Response
         public decimal? BasicEstimatedCost { get; set; }
         public int? NoOfMaleWorkers { get; set; }
         public int? NoOfFemaleWorkers { get; set; }
+
     }
 }

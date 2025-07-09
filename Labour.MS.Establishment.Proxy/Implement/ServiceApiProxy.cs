@@ -48,7 +48,7 @@ namespace Labour.MS.Establishment.Proxy.Implement
         {
             return await InvokeApi<EstablishmentDetailsAdapterResponse>(
                 httpMethod: HttpMethod.Get,
-                endPoint: "api/Establishment/GetAllEstablishmentDetails",
+                endPoint: "adapter/establishment/alldetails",
                 requestHeaders: requestHeaders);
         }
 
@@ -65,7 +65,7 @@ namespace Labour.MS.Establishment.Proxy.Implement
         {
             return await InvokeApi<EstablishmentDetailsAdapterRequest, EstablishmentAdapterResponse>(
                 httpMethod: HttpMethod.Post,
-                endPoint: "api/Establishment/PersistEstablishmentDetails",
+                endPoint: "adapter/establishment",
                 request: request,
                 requestHeaders: requestHeaders);
         }

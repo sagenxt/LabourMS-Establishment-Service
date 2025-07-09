@@ -18,14 +18,17 @@ namespace Labour.MS.Establishment.Proxy.Implement
     {
         private readonly HttpClient _httpClient;
         private readonly ILogger<BaseApiProxy> _logger;
-        private readonly ApiProxyOptions _options;
+        private readonly IOptions<ApiProxyOptions> _options;
         private readonly JsonSerializerOptions _jsonOptions;
 
         public BaseApiProxy(ILogger<BaseApiProxy> logger, IOptions<ApiProxyOptions> options, HttpClient httpClient)
         {
-            _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
-            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            _options = options?.Value ?? throw new ArgumentNullException(nameof(options));
+            _logger = logger;
+            _options = options;
+            _httpClient = httpClient;
+            //_httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+            //_logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            //_options = options?.Value ?? throw new ArgumentNullException(nameof(options));
 
             _jsonOptions = new JsonSerializerOptions
             {
@@ -38,15 +41,15 @@ namespace Labour.MS.Establishment.Proxy.Implement
 
         private void ConfigureHttpClient()
         {
-            if (!string.IsNullOrEmpty(_options.BaseUrl))
+            if (!string.IsNullOrEmpty(_options.Value.BaseUrl))
             {
-                _httpClient.BaseAddress = new Uri(_options.BaseUrl);
+                _httpClient.BaseAddress = new Uri(_options.Value.BaseUrl);
             }
 
-            _httpClient.Timeout = _options.Timeout;
+            _httpClient.Timeout = _options.Value.Timeout;
 
             // Add default headers
-            foreach (var header in _options.DefaultHeaders)
+            foreach (var header in _options.Value.DefaultHeaders)
             {
                 _httpClient.DefaultRequestHeaders.TryAddWithoutValidation(header.Key, header.Value);
             }
@@ -57,7 +60,7 @@ namespace Labour.MS.Establishment.Proxy.Implement
 
         private void ConfigureAuthentication()
         {
-            var auth = _options.Authentication;
+            var auth = _options.Value.Authentication;
 
             switch (auth.Type.ToLower())
             {
@@ -103,7 +106,7 @@ namespace Labour.MS.Establishment.Proxy.Implement
 
             try
             {
-                if (_options.EnableLogging)
+                if (_options.Value.EnableLogging)
                 {
                     LogRequest(requestId, httpRequest);
                 }
@@ -111,7 +114,7 @@ namespace Labour.MS.Establishment.Proxy.Implement
                 using var response = await _httpClient.SendAsync(httpRequest);
                 stopwatch.Stop();
 
-                if (_options.EnableLogging)
+                if (_options.Value.EnableLogging)
                 {
                     LogResponse(requestId, response, stopwatch.Elapsed);
                 }
@@ -179,11 +182,11 @@ namespace Labour.MS.Establishment.Proxy.Implement
 
         private void LogRequest(string? requestId, HttpRequestMessage request)
         {
-            if (!_options.EnableLogging) return;
+            if (!_options.Value.EnableLogging) return;
 
             var logMessage = $"Request {requestId}: {request.Method} {request.RequestUri}";
 
-            if (_options.LogSensitiveData)
+            if (_options.Value.LogSensitiveData)
             {
                 logMessage += $"\nHeaders: {string.Join(", ", request.Headers.Select(h => $"{h.Key}: {string.Join(", ", h.Value)}"))}";
 
@@ -202,11 +205,11 @@ namespace Labour.MS.Establishment.Proxy.Implement
 
         private void LogResponse(string? requestId, HttpResponseMessage response, TimeSpan elapsed)
         {
-            if (!_options.EnableLogging) return;
+            if (!_options.Value.EnableLogging) return;
 
             var logMessage = $"Response {requestId}: {(int)response.StatusCode} {response.ReasonPhrase} in {elapsed.TotalMilliseconds}ms";
 
-            if (_options.LogSensitiveData)
+            if (_options.Value.LogSensitiveData)
             {
                 logMessage += $"\nHeaders: {string.Join(", ", response.Headers.Select(h => $"{h.Key}: {string.Join(", ", h.Value)}"))}";
             }

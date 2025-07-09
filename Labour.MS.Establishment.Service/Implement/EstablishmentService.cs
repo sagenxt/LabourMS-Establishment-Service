@@ -16,6 +16,7 @@ using Labour.MS.Establishment.Utility.Constants;
 using Microsoft.AspNetCore.Http.Headers;
 using Org.BouncyCastle.Asn1.Ocsp;
 using Labour.MS.Establishment.Models.Proxy.Request;
+using Labour.MS.Establishment.Service.Mappers;
 
 namespace Labour.MS.Establishment.Service.Implement
 {
@@ -95,7 +96,13 @@ namespace Labour.MS.Establishment.Service.Implement
                     return this._apiResponseFactory.BadRequestApiResponse<EstablishmentDetailsResponse?>("" ?? "Unknown error", nameof(RetrieveEstablishmentDetailsAsync));
                 }
 
-                var establishmentDetails = this._mapper.Map<EstablishmentDetailsResponse?>(response.Data);
+                if (response.Data == null || response.Data.Data == null)
+                {
+                    this._logger.LogWarning("No establishment details found for the provided establishment id.");
+                    return this._apiResponseFactory.NotFoundApiResponse<EstablishmentDetailsResponse?>("No establishment details found for the provided establishment id.", nameof(RetrieveEstablishmentDetailsAsync));
+                }
+
+                var establishmentDetails = EstablishmentResponseMapper.MapToEstalishmentDetailsResponse(response.Data.Data);
 
                 this._logger.LogInformation($"Method Name : {nameof(RetrieveEstablishmentDetailsAsync)} completed");
                 return this._apiResponseFactory.ValidApiResponse(establishmentDetails);
