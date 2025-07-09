@@ -1,0 +1,616 @@
+{
+  "openapi": "3.0.4",
+  "info": {
+    "title": "Labour.MS.Establishment.Api",
+    "version": "1.0"
+  },
+  "paths": {
+    "/labourms/v1/services/establishment/alldetails": {
+      "get": {
+        "tags": [
+          "Establishment"
+        ],
+        "parameters": [
+          {
+            "name": "requestHeaders",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/EstablishmentRequestHeaders"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EstablishmentDetailsResponseIApiResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "499": {
+            "description": "Client Error"
+          }
+        }
+      }
+    },
+    "/labourms/v1/services/establishment/establishment": {
+      "post": {
+        "tags": [
+          "Establishment"
+        ],
+        "parameters": [
+          {
+            "name": "requestHeaders",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/EstablishmentRequestHeaders"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EstablishmentDetailsRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EstablishmentDetailsRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EstablishmentDetailsRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EstablishmentResponseIApiResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "499": {
+            "description": "Client Error"
+          }
+        }
+      }
+    },
+    "/labourms/v1/services/establishment/details": {
+      "post": {
+        "tags": [
+          "Establishment"
+        ],
+        "parameters": [
+          {
+            "name": "requestHeaders",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/EstablishmentRequestHeaders"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EstablishmentRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EstablishmentRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EstablishmentRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EstablishmentDetailsResponseIApiResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "499": {
+            "description": "Client Error"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AddressDetail": {
+        "type": "object",
+        "properties": {
+          "doorNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "street": {
+            "type": "string",
+            "nullable": true
+          },
+          "stateId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "stateCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "stateName": {
+            "type": "string",
+            "nullable": true
+          },
+          "districtId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "districtCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "districtName": {
+            "type": "string",
+            "nullable": true
+          },
+          "cityId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "cityCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "cityName": {
+            "type": "string",
+            "nullable": true
+          },
+          "villageOrArea": {
+            "type": "string",
+            "nullable": true
+          },
+          "pincode": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "nullable": true
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "target": {
+            "type": "string",
+            "nullable": true
+          },
+          "details": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EstablishmentBusinessDetail": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "isPlanApprovalId": {
+            "type": "string",
+            "nullable": true
+          },
+          "planApprovalId": {
+            "type": "string",
+            "nullable": true
+          },
+          "categoryId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "categoryName": {
+            "type": "string",
+            "nullable": true
+          },
+          "workNatureId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "workNatureName": {
+            "type": "string",
+            "nullable": true
+          },
+          "commencementDate": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          },
+          "completionDate": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EstablishmentConstructionDetail": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "constructionEstimatedCost": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "constructionArea": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "builtUpArea": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "basicEstimatedCost": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "noOfMaleWorkers": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "noOfFemaleWorkers": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EstablishmentDetail": {
+        "type": "object",
+        "properties": {
+          "establishmentName": {
+            "type": "string",
+            "nullable": true
+          },
+          "contactPerson": {
+            "type": "string",
+            "nullable": true
+          },
+          "mobileNumber": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "emailId": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EstablishmentDetailsRequest": {
+        "type": "object",
+        "properties": {
+          "establishmentId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "establishmentDetails": {
+            "$ref": "#/components/schemas/EstablishmentDetail"
+          },
+          "addressDetails": {
+            "$ref": "#/components/schemas/AddressDetail"
+          },
+          "businessDetails": {
+            "$ref": "#/components/schemas/EstablishmentBusinessDetail"
+          },
+          "constructionDetails": {
+            "$ref": "#/components/schemas/EstablishmentConstructionDetail"
+          },
+          "isAcceptedTermsAndConditions": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EstablishmentDetailsResponse": {
+        "type": "object",
+        "properties": {
+          "establishmentId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "establishmentDetails": {
+            "$ref": "#/components/schemas/EstablishmentDetail"
+          },
+          "addressDetails": {
+            "$ref": "#/components/schemas/AddressDetail"
+          },
+          "businessDetails": {
+            "$ref": "#/components/schemas/EstablishmentBusinessDetail"
+          },
+          "constructionDetails": {
+            "$ref": "#/components/schemas/EstablishmentConstructionDetail"
+          }
+        },
+        "additionalProperties": false
+      },
+      "EstablishmentDetailsResponseIApiResponse": {
+        "type": "object",
+        "properties": {
+          "correlationId": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/EstablishmentDetailsResponse"
+          },
+          "error": {
+            "$ref": "#/components/schemas/Error"
+          }
+        },
+        "additionalProperties": false
+      },
+      "EstablishmentRequest": {
+        "type": "object",
+        "properties": {
+          "establishmentId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EstablishmentRequestHeaders": {
+        "type": "object",
+        "properties": {
+          "xRequestId": {
+            "type": "string",
+            "nullable": true
+          },
+          "correlationId": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EstablishmentResponse": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EstablishmentResponseIApiResponse": {
+        "type": "object",
+        "properties": {
+          "correlationId": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/EstablishmentResponse"
+          },
+          "error": {
+            "$ref": "#/components/schemas/Error"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}

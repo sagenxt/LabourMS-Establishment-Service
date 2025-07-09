@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Labour.MS.Establishment.Api.props" />
+</Project>
