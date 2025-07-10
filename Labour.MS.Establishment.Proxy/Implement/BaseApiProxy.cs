@@ -39,55 +39,6 @@ namespace Labour.MS.Establishment.Proxy.Implement
             ConfigureHttpClient();
         }
 
-        private void ConfigureHttpClient()
-        {
-            if (!string.IsNullOrEmpty(_options.Value.BaseUrl))
-            {
-                _httpClient.BaseAddress = new Uri(_options.Value.BaseUrl);
-            }
-
-            _httpClient.Timeout = _options.Value.Timeout;
-
-            // Add default headers
-            foreach (var header in _options.Value.DefaultHeaders)
-            {
-                _httpClient.DefaultRequestHeaders.TryAddWithoutValidation(header.Key, header.Value);
-            }
-
-            // Configure authentication
-            ConfigureAuthentication();
-        }
-
-        private void ConfigureAuthentication()
-        {
-            var auth = _options.Value.Authentication;
-
-            switch (auth.Type.ToLower())
-            {
-                case "bearer":
-                    if (!string.IsNullOrEmpty(auth.Token))
-                    {
-                        _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", auth.Token);
-                    }
-                    break;
-
-                case "basic":
-                    if (!string.IsNullOrEmpty(auth.Username) && !string.IsNullOrEmpty(auth.Password))
-                    {
-                        var credentials = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{auth.Username}:{auth.Password}"));
-                        _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", credentials);
-                    }
-                    break;
-
-                case "apikey":
-                    if (!string.IsNullOrEmpty(auth.Token))
-                    {
-                        _httpClient.DefaultRequestHeaders.TryAddWithoutValidation(auth.ApiKeyHeaderName, auth.Token);
-                    }
-                    break;
-            }
-        }
-
         public async Task<ApiProxyResponse<T>> InvokeApi<T>(HttpMethod httpMethod, string endPoint, IRequestHeaders requestHeaders)
         {
             var request = new HttpRequestMessage(httpMethod, endPoint);
@@ -96,7 +47,7 @@ namespace Labour.MS.Establishment.Proxy.Implement
 
         public async Task<ApiProxyResponse<T>> InvokeApi<Q, T>(HttpMethod httpMethod, string endPoint, Q request, IRequestHeaders requestHeaders)
         {
-            using var httpRequest = CreateHttpRequestMessage(httpMethod, endPoint, request, requestHeaders);
+            using var httpRequest = BuildHttpRequestAsync(httpMethod, endPoint, request, requestHeaders);
             return await InvokeApi<T>(httpRequest, requestHeaders.CorrelationId);
         }
 
@@ -160,10 +111,9 @@ namespace Labour.MS.Establishment.Proxy.Implement
             }
         }
 
-        private HttpRequestMessage CreateHttpRequestMessage<Q>(HttpMethod method, string endpoint, Q? request, IRequestHeaders requestHeaders)
+        private HttpRequestMessage BuildHttpRequestAsync<Q>(HttpMethod method, string endpoint, Q? request, IRequestHeaders requestHeaders)
         {
             var httpRequest = new HttpRequestMessage(method, endpoint);
-
             // Add custom headers
             if (requestHeaders != null)
             {
@@ -178,6 +128,54 @@ namespace Labour.MS.Establishment.Proxy.Implement
             }
 
             return httpRequest;
+        }
+
+        private void ConfigureHttpClient()
+        {
+            if (_httpClient.BaseAddress ==  null && !string.IsNullOrEmpty(_options.Value.BaseUrl))
+            {
+                _httpClient.BaseAddress = new Uri(_options.Value.BaseUrl);
+                _httpClient.Timeout = _options.Value.Timeout;
+            }
+
+            // Add default headers
+            foreach (var header in _options.Value.DefaultHeaders)
+            {
+                _httpClient.DefaultRequestHeaders.TryAddWithoutValidation(header.Key, header.Value);
+            }
+
+            // Configure authentication
+            ConfigureAuthentication();
+        }
+
+        private void ConfigureAuthentication()
+        {
+            var auth = _options.Value.Authentication;
+
+            switch (auth.Type.ToLower())
+            {
+                case "bearer":
+                    if (!string.IsNullOrEmpty(auth.Token))
+                    {
+                        _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", auth.Token);
+                    }
+                    break;
+
+                case "basic":
+                    if (!string.IsNullOrEmpty(auth.Username) && !string.IsNullOrEmpty(auth.Password))
+                    {
+                        var credentials = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{auth.Username}:{auth.Password}"));
+                        _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", credentials);
+                    }
+                    break;
+
+                case "apikey":
+                    if (!string.IsNullOrEmpty(auth.Token))
+                    {
+                        _httpClient.DefaultRequestHeaders.TryAddWithoutValidation(auth.ApiKeyHeaderName, auth.Token);
+                    }
+                    break;
+            }
         }
 
         private void LogRequest(string? requestId, HttpRequestMessage request)
